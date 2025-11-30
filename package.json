@@ -12,6 +12,7 @@
 		"studio": "prisma studio --browser none"
 	},
 	"dependencies": {
+		"@hookform/resolvers": "^5.2.2",
 		"@prisma/adapter-better-sqlite3": "^7.0.0",
 		"@prisma/adapter-libsql": "^7.0.0",
 		"@prisma/client": "^7.0.0",
@@ -27,8 +28,10 @@
 		"next-themes": "^0.4.6",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
+		"react-hook-form": "^7.67.0",
 		"sharp": "^0.34.5",
-		"tailwind-merge": "^3.4.0"
+		"tailwind-merge": "^3.4.0",
+		"zod": "^4.1.13"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.1.17",
