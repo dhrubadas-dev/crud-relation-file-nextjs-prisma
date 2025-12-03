@@ -1,3 +1,12 @@
+import AddTeacherForm from "@/components/AddTeacherForm";
+import { Button } from "@/components/shadcnui/button";
+import {
+	Card,
+	CardContent,
+	CardFooter,
+	CardHeader,
+	CardTitle,
+} from "@/components/shadcnui/card";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,7 +15,22 @@ export const metadata: Metadata = {
 };
 
 const page = () => {
-	return <></>;
+	return (
+		<section className="grid h-[90dvh] place-items-center">
+			<Card className="w-xs">
+				<CardHeader className="grid place-items-center">
+					<CardTitle className="text-2xl">Teacher Card</CardTitle>
+				</CardHeader>
+				<CardContent>
+					<AddTeacherForm />
+				</CardContent>
+				<CardFooter className="grid grid-cols-2 gap-4">
+					<Button variant="destructive">Destructive</Button>
+					<Button>Button</Button>
+				</CardFooter>
+			</Card>
+		</section>
+	);
 };
 
 export default page;
