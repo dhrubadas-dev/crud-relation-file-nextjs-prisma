@@ -24,10 +24,7 @@ const page = () => {
 				<CardContent>
 					<AddTeacherForm />
 				</CardContent>
-				<CardFooter className="grid grid-cols-2 gap-4">
-					<Button variant="destructive">Destructive</Button>
-					<Button>Button</Button>
-				</CardFooter>
+				<CardFooter className=""></CardFooter>
 			</Card>
 		</section>
 	);
