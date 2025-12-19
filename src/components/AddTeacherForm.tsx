@@ -45,6 +45,7 @@ const AddTeacherForm = () => {
 						<Input
 							{...field}
 							id={field.name}
+							type="text"
 							aria-invalid={fieldState.invalid}
 							placeholder="Enter your full name"
 							autoComplete="name"
