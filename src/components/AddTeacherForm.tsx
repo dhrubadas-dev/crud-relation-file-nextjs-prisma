@@ -19,7 +19,11 @@ import {
 import { Separator } from "./shadcnui/separator";
 
 const AddTeacherForm = () => {
-	const { handleSubmit, control } = useForm({
+	const {
+		handleSubmit,
+		control,
+		formState: { isSubmitting },
+	} = useForm({
 		resolver: zodResolver(teacherFormSchema),
 		defaultValues: {
 			tFullName: "",
@@ -100,6 +104,7 @@ const AddTeacherForm = () => {
 
 					<Button
 						type="submit"
+						disabled={isSubmitting}
 						className="cursor-pointer">
 						Submit
 					</Button>
