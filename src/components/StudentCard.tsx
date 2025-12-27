@@ -1,3 +1,10 @@
+import {
+	MailIcon,
+	MarsIcon,
+	PhoneCallIcon,
+	SquareUserIcon,
+} from "lucide-react";
+import { StudentTable } from "../../generated/prisma/browser";
 import { Button } from "./shadcnui/button";
 import {
 	Card,
@@ -8,30 +15,39 @@ import {
 } from "./shadcnui/card";
 import { Separator } from "./shadcnui/separator";
 
-const StudentCard = () => {
+type StudentCardProps = {
+	asData: StudentTable;
+};
+
+const StudentCard = ({ asData }: StudentCardProps) => {
 	return (
 		<Card className="w-sm gap-2">
 			<CardHeader>
-				<CardTitle className="text-center text-3xl">Dhruba Das</CardTitle>
+				<CardTitle className="text-center text-3xl">
+					{asData.sFullName}
+				</CardTitle>
 			</CardHeader>
 
 			<Separator />
 
 			<CardContent className="grid place-items-center gap-4 text-lg">
-				{/* <MailIcon />
-				<span className="col-span-3 place-self-start">dhruba@gmail.com</span>
-				<div className="grid">
-					<div className="">
-						<PhoneIcon />
-						<span className="col-span-3 place-self-start">+91 6297781575</span>
+				<div className="flex gap-2">
+					<MailIcon />
+					<span className="col-span-2 place-self-start">{asData.sEmail}</span>
+				</div>
+
+				<div className="flex gap-6">
+					<div className="flex gap-2">
+						<PhoneCallIcon /> +91 {asData.sPhoneNumber}
 					</div>
-					<div className="">
-						<MarsStrokeIcon />
-						<span className="col-span-3 place-self-start"></span>
+					<div className="flex gap-2">
+						<MarsIcon /> {asData.sGender}
 					</div>
 				</div>
-				<SquareUserRoundIcon />
-				<span className="col-span-3 place-self-start">Teacher Name</span> */}
+
+				<div className="flex gap-2">
+					<SquareUserIcon /> {asData.teacherTableTId}
+				</div>
 			</CardContent>
 
 			<Separator />
@@ -42,6 +58,7 @@ const StudentCard = () => {
 					className="cursor-pointer">
 					Delete
 				</Button>
+
 				<Button
 					variant={"secondary"}
 					className="cursor-pointer">
