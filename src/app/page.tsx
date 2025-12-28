@@ -1,24 +1,27 @@
 import StudentCard from "@/components/StudentCard";
+import prisma from "@/lib/db";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "Nextjs Starter Frontend",
-	description: "Production grade Next.js starter template",
+	title: "All Student | User CURD App",
+	description: "All student page of User CURD App",
 };
 
-const page = () => {
+const page = async () => {
+	const allStudentData = await prisma.studentTable.findMany({
+		include: {
+			teacherTable: true,
+		},
+	});
+
 	return (
 		<section className="grid grid-cols-1 place-items-center gap-6 md:grid-cols-2 xl:grid-cols-3">
-			<StudentCard />
-			<StudentCard />
-			<StudentCard />
-			<StudentCard />
-			<StudentCard />
-			<StudentCard />
-			<StudentCard />
-			<StudentCard />
-			<StudentCard />
-			<StudentCard />
+			{allStudentData.map((info) => (
+				<StudentCard
+					key={info.sId}
+					student={info}
+				/>
+			))}
 		</section>
 	);
 };

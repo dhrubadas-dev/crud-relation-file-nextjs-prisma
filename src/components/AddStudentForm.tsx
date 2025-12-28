@@ -126,9 +126,9 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 										<SelectValue placeholder="Select your Gender" />
 									</SelectTrigger>
 									<SelectContent position="item-aligned">
-										<SelectItem value="engineering">Male</SelectItem>
-										<SelectItem value="design">Female</SelectItem>
-										<SelectItem value="marketing">Other</SelectItem>
+										<SelectItem value="male">Male</SelectItem>
+										<SelectItem value="female">Female</SelectItem>
+										<SelectItem value="others">Others</SelectItem>
 									</SelectContent>
 								</Select>
 								{fieldState.invalid && (
