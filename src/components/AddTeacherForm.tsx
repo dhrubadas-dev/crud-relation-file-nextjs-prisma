@@ -20,8 +20,12 @@ import { Separator } from "./shadcnui/separator";
 import createTeacher from "@/server/createTeacher";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import fakerGenerator from "@/hooks/fakerGenerator";
 
 const AddTeacherForm = () => {
+	const [isGenerating, setIsGenerating] = useState(false);
+
 	const { push } = useRouter();
 
 	const {
@@ -52,6 +56,18 @@ const AddTeacherForm = () => {
 		} else {
 			toast.error(message);
 		}
+	};
+
+	const generateTeacher = async () => {
+		setIsGenerating(true);
+
+		const fakeData = fakerGenerator();
+
+		await new Promise<void>((r) => setTimeout(r, 1000));
+
+		console.log(fakeData);
+
+		setIsGenerating(false);
 	};
 
 	return (
@@ -119,8 +135,8 @@ const AddTeacherForm = () => {
 					/>
 
 					<Button
-						className="cursor-pointer"
 						type="submit"
+						className="cursor-pointer"
 						disabled={isSubmitting}>
 						{isSubmitting ? (
 							<>
@@ -139,10 +155,19 @@ const AddTeacherForm = () => {
 
 			<CardFooter className="grid pt-3">
 				<Button
-					type="submit"
-					className="cursor-pointer">
-					<SparklesIcon />
-					Generate
+					type="button"
+					className="cursor-pointer"
+					onClick={generateTeacher}
+					disabled={isGenerating}>
+					{isGenerating ? (
+						<>
+							<Loader2Icon className="animate-spin" /> Generating..
+						</>
+					) : (
+						<>
+							<SparklesIcon /> Generate
+						</>
+					)}
 				</Button>
 			</CardFooter>
 		</>
