@@ -4,7 +4,6 @@ import {
 	PhoneCallIcon,
 	SquareUserIcon,
 } from "lucide-react";
-import { StudentTable } from "../../generated/prisma/browser";
 import { Button } from "./shadcnui/button";
 import {
 	Card,
@@ -15,16 +14,13 @@ import {
 } from "./shadcnui/card";
 import { Separator } from "./shadcnui/separator";
 
-type StudentCardProps = {
-	asData: StudentTable;
-};
-
-const StudentCard = ({ asData }: StudentCardProps) => {
+const StudentCard = () => {
 	return (
 		<Card className="w-sm gap-2">
 			<CardHeader>
 				<CardTitle className="text-center text-3xl">
-					{asData.sFullName}
+					{/* {asData.sFullName} */}
+					Dhruba Das
 				</CardTitle>
 			</CardHeader>
 
@@ -33,20 +29,22 @@ const StudentCard = ({ asData }: StudentCardProps) => {
 			<CardContent className="grid place-items-center gap-4 text-lg">
 				<div className="flex gap-2">
 					<MailIcon />
-					<span className="col-span-2 place-self-start">{asData.sEmail}</span>
+					<span className="col-span-2 place-self-start">Email</span>
 				</div>
 
 				<div className="flex gap-6">
 					<div className="flex gap-2">
-						<PhoneCallIcon /> +91 {asData.sPhoneNumber}
+						<PhoneCallIcon />
+						+91 254574254
 					</div>
 					<div className="flex gap-2">
-						<MarsIcon /> {asData.sGender}
+						<MarsIcon /> Male
 					</div>
 				</div>
 
 				<div className="flex gap-2">
-					<SquareUserIcon /> {asData.teacherTableTId}
+					<SquareUserIcon />
+					Teacher Name
 				</div>
 			</CardContent>
 

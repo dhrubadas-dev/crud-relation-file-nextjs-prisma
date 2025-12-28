@@ -17,12 +17,18 @@ import {
 	SelectValue,
 } from "./shadcnui/select";
 import { Separator } from "./shadcnui/separator";
+import createTeacher from "@/server/createTeacher";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const AddTeacherForm = () => {
+	const { push } = useRouter();
+
 	const {
 		handleSubmit,
 		control,
 		formState: { isSubmitting },
+		reset,
 	} = useForm({
 		resolver: zodResolver(teacherFormSchema),
 		defaultValues: {
@@ -33,9 +39,19 @@ const AddTeacherForm = () => {
 	});
 
 	const addteacherhandler = async (atData: TeacherFormType) => {
-		await new Promise<void>((r) => setTimeout(r, 2000));
+		const { isSuccess, message } = await createTeacher(atData);
 
-		console.log(atData);
+		await new Promise<void>((r) => setTimeout(r, 1000));
+
+		if (isSuccess) {
+			toast.success(message);
+
+			reset();
+
+			push("/student/create");
+		} else {
+			toast.error(message);
+		}
 	};
 
 	return (
