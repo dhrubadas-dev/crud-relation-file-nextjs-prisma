@@ -3,7 +3,7 @@
 import { StudentFormType } from "@/lib/formType";
 import { studentFormSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SparklesIcon } from "lucide-react";
+import { Loader2Icon, SendIcon, SparklesIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "./shadcnui/button";
 import { CardContent, CardFooter } from "./shadcnui/card";
@@ -17,9 +17,24 @@ import {
 	SelectValue,
 } from "./shadcnui/select";
 import { Separator } from "./shadcnui/separator";
+import { TeacherTable } from "../../generated/prisma/client";
+import { useRouter } from "next/navigation";
+import createStudent from "@/server/createStudent";
+import { toast } from "react-toastify";
 
-const AddStudentForm = () => {
-	const { handleSubmit, control } = useForm({
+type StudentFormProps = {
+	teachersInfo: TeacherTable[];
+};
+
+const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
+	const { push } = useRouter();
+
+	const {
+		handleSubmit,
+		control,
+		formState: { isSubmitting },
+		reset,
+	} = useForm({
 		resolver: zodResolver(studentFormSchema),
 		defaultValues: {
 			sFullName: "",
@@ -32,9 +47,19 @@ const AddStudentForm = () => {
 	});
 
 	const addStudentHandler = async (asData: StudentFormType) => {
-		await new Promise<void>((r) => setTimeout(r, 2000));
+		const { isSuccess, message } = await createStudent(asData);
 
-		console.log(asData);
+		await new Promise<void>((r) => setTimeout(r, 1000));
+
+		if (isSuccess) {
+			toast.success(message);
+
+			reset();
+
+			push("/");
+		} else {
+			toast.error(message);
+		}
 	};
 
 	return (
@@ -150,7 +175,14 @@ const AddStudentForm = () => {
 										<SelectValue placeholder="Select your Teacher" />
 									</SelectTrigger>
 									<SelectContent position="item-aligned">
-										<SelectItem value="engineering">Saikat Sir</SelectItem>
+										{teachersInfo.map(({ tId, tFullName, tSubject }) => (
+											<SelectItem
+												key={tId}
+												value={tId}>
+												{tFullName}
+												<span className="capitalize">({tSubject})</span>
+											</SelectItem>
+										))}
 									</SelectContent>
 								</Select>
 								{fieldState.invalid && (
@@ -161,9 +193,18 @@ const AddStudentForm = () => {
 					/>
 
 					<Button
+						className="cursor-pointer"
 						type="submit"
-						className="cursor-pointer">
-						Submit
+						disabled={isSubmitting}>
+						{isSubmitting ? (
+							<>
+								<Loader2Icon className="animate-spin" /> Submitting..
+							</>
+						) : (
+							<>
+								<SendIcon /> Submit
+							</>
+						)}
 					</Button>
 				</form>
 			</CardContent>

@@ -19,10 +19,7 @@ const StudentCard = () => {
 	return (
 		<Card className="w-sm gap-2">
 			<CardHeader>
-				<CardTitle className="text-center text-3xl">
-					{/* {asData.sFullName} */}
-					Mr. Dhruba Das
-				</CardTitle>
+				<CardTitle className="text-center text-3xl">Mr. Dhruba Das</CardTitle>
 			</CardHeader>
 
 			<Separator />

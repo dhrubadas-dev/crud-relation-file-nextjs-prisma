@@ -3,7 +3,7 @@
 import { TeacherFormType } from "@/lib/formType";
 import { teacherFormSchema } from "@/lib/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SparklesIcon } from "lucide-react";
+import { Loader2Icon, SendIcon, SparklesIcon } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import { Button } from "./shadcnui/button";
 import { CardContent, CardFooter } from "./shadcnui/card";
@@ -119,10 +119,18 @@ const AddTeacherForm = () => {
 					/>
 
 					<Button
+						className="cursor-pointer"
 						type="submit"
-						disabled={isSubmitting}
-						className="cursor-pointer">
-						Submit
+						disabled={isSubmitting}>
+						{isSubmitting ? (
+							<>
+								<Loader2Icon className="animate-spin" /> Submitting..
+							</>
+						) : (
+							<>
+								<SendIcon /> Submit
+							</>
+						)}
 					</Button>
 				</form>
 			</CardContent>

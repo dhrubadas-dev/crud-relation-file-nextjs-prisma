@@ -1,21 +1,21 @@
 "use server";
 
-import { TeacherFormType } from "@/lib/formType";
-import { Prisma } from "../../generated/prisma/client";
 import prisma from "@/lib/db";
+import { StudentFormType } from "@/lib/formType";
 import { revalidatePath } from "next/cache";
+import { Prisma } from "../../generated/prisma/client";
 
-const createTeacher = async (atData: TeacherFormType) => {
+const createStudent = async (asData: StudentFormType) => {
 	try {
-		await prisma.teacherTable.create({
-			data: atData,
+		await prisma.studentTable.create({
+			data: asData,
 		});
 
-		revalidatePath("/student/create");
+		revalidatePath("/");
 
 		return {
 			isSuccess: true,
-			message: "Teacher created successfully",
+			message: "Student created successfully",
 		};
 	} catch (error) {
 		if (error instanceof Prisma.PrismaClientKnownRequestError) {
@@ -32,4 +32,4 @@ const createTeacher = async (atData: TeacherFormType) => {
 	}
 };
 
-export default createTeacher;
+export default createStudent;
