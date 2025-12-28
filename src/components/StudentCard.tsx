@@ -13,6 +13,7 @@ import {
 	CardTitle,
 } from "./shadcnui/card";
 import { Separator } from "./shadcnui/separator";
+import { Badge } from "./shadcnui/badge";
 
 const StudentCard = () => {
 	return (
@@ -20,31 +21,31 @@ const StudentCard = () => {
 			<CardHeader>
 				<CardTitle className="text-center text-3xl">
 					{/* {asData.sFullName} */}
-					Dhruba Das
+					Mr. Dhruba Das
 				</CardTitle>
 			</CardHeader>
 
 			<Separator />
 
 			<CardContent className="grid place-items-center gap-4 text-lg">
-				<div className="flex gap-2">
+				<div className="flex items-center gap-2">
 					<MailIcon />
 					<span className="col-span-2 place-self-start">Email</span>
 				</div>
 
 				<div className="flex gap-6">
-					<div className="flex gap-2">
+					<div className="flex items-center gap-2">
 						<PhoneCallIcon />
 						+91 254574254
 					</div>
-					<div className="flex gap-2">
+					<div className="flex items-center gap-2">
 						<MarsIcon /> Male
 					</div>
 				</div>
 
-				<div className="flex gap-2">
+				<div className="flex items-center gap-2">
 					<SquareUserIcon />
-					Teacher Name
+					<span>Teacher Name</span> <Badge>English</Badge>
 				</div>
 			</CardContent>
 
