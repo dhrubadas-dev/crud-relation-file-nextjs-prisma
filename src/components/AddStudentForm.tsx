@@ -21,12 +21,16 @@ import { TeacherTable } from "../../generated/prisma/client";
 import { useRouter } from "next/navigation";
 import createStudent from "@/server/createStudent";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import fakerGenerator from "@/hooks/fakerGenerator";
 
 type StudentFormProps = {
 	teachersInfo: TeacherTable[];
 };
 
 const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
+	const [isGenerating, setIsGenerating] = useState(false);
+
 	const { push } = useRouter();
 
 	const {
@@ -34,6 +38,7 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 		control,
 		formState: { isSubmitting },
 		reset,
+		setValue,
 	} = useForm({
 		resolver: zodResolver(studentFormSchema),
 		defaultValues: {
@@ -60,6 +65,23 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 		} else {
 			toast.error(message);
 		}
+	};
+
+	const generateStudent = async () => {
+		setIsGenerating(true);
+
+		const { fullName, email, sex, phoneNumber } = fakerGenerator();
+
+		await new Promise<void>((r) => setTimeout(r, 1000));
+
+		// console.log(fullName);
+
+		setValue("sFullName", fullName);
+		setValue("sEmail", email);
+		setValue("sGender", sex);
+		setValue("sPhoneNumber", phoneNumber);
+
+		setIsGenerating(false);
 	};
 
 	return (
@@ -213,10 +235,19 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 
 			<CardFooter className="grid pt-3">
 				<Button
-					type="submit"
-					className="cursor-pointer">
-					<SparklesIcon />
-					Generate
+					type="button"
+					className="cursor-pointer"
+					onClick={generateStudent}
+					disabled={isGenerating}>
+					{isGenerating ? (
+						<>
+							<SparklesIcon className="animate-bounce" /> Generating..
+						</>
+					) : (
+						<>
+							<SparklesIcon /> Generate
+						</>
+					)}
 				</Button>
 			</CardFooter>
 		</>

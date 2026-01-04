@@ -33,6 +33,7 @@ const AddTeacherForm = () => {
 		control,
 		formState: { isSubmitting },
 		reset,
+		setValue,
 	} = useForm({
 		resolver: zodResolver(teacherFormSchema),
 		defaultValues: {
@@ -61,11 +62,13 @@ const AddTeacherForm = () => {
 	const generateTeacher = async () => {
 		setIsGenerating(true);
 
-		const fakeData = fakerGenerator();
+		const { fullName } = fakerGenerator();
 
 		await new Promise<void>((r) => setTimeout(r, 1000));
 
-		console.log(fakeData);
+		// console.log(fullName);
+
+		setValue("tFullName", fullName);
 
 		setIsGenerating(false);
 	};
@@ -161,7 +164,7 @@ const AddTeacherForm = () => {
 					disabled={isGenerating}>
 					{isGenerating ? (
 						<>
-							<Loader2Icon className="animate-spin" /> Generating..
+							<SparklesIcon className="animate-bounce" /> Generating..
 						</>
 					) : (
 						<>
