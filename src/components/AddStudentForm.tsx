@@ -39,6 +39,7 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 		formState: { isSubmitting },
 		reset,
 		setValue,
+		clearErrors,
 	} = useForm({
 		resolver: zodResolver(studentFormSchema),
 		defaultValues: {
@@ -80,6 +81,8 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 		setValue("sEmail", email);
 		setValue("sGender", sex);
 		setValue("sPhoneNumber", phoneNumber);
+
+		clearErrors();
 
 		setIsGenerating(false);
 	};

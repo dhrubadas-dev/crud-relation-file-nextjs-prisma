@@ -34,6 +34,7 @@ const AddTeacherForm = () => {
 		formState: { isSubmitting },
 		reset,
 		setValue,
+		clearErrors,
 	} = useForm({
 		resolver: zodResolver(teacherFormSchema),
 		defaultValues: {
@@ -69,6 +70,8 @@ const AddTeacherForm = () => {
 		// console.log(fullName);
 
 		setValue("tFullName", fullName);
+
+		clearErrors();
 
 		setIsGenerating(false);
 	};
