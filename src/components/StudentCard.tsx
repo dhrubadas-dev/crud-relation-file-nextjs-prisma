@@ -6,6 +6,7 @@ import {
 	TransgenderIcon,
 	VenusIcon,
 } from "lucide-react";
+import Link from "next/link";
 import { Prisma } from "../../generated/prisma/client";
 import { Badge } from "./shadcnui/badge";
 import { Button } from "./shadcnui/button";
@@ -93,11 +94,13 @@ const StudentCard = ({ student }: StudentCardProps) => {
 					Delete
 				</Button>
 
-				<Button
-					variant={"secondary"}
-					className="cursor-pointer">
-					Update
-				</Button>
+				<Link href={`/student/${student.sId}`}>
+					<Button
+						variant={"secondary"}
+						className="w-full cursor-pointer">
+						Update
+					</Button>
+				</Link>
 			</CardFooter>
 		</Card>
 	);
