@@ -18,6 +18,7 @@ import {
 	CardTitle,
 } from "./shadcnui/card";
 import { Separator } from "./shadcnui/separator";
+import DeleteStudentButton from "./DeleteStudentButton";
 
 type StudentCardProps = {
 	student: Prisma.StudentTableGetPayload<{
@@ -29,6 +30,7 @@ type StudentCardProps = {
 
 const StudentCard = ({ student }: StudentCardProps) => {
 	const {
+		sId,
 		sFullName,
 		sEmail,
 		sPhoneNumber,
@@ -88,13 +90,9 @@ const StudentCard = ({ student }: StudentCardProps) => {
 			<Separator />
 
 			<CardFooter className="grid grid-cols-2 gap-4">
-				<Button
-					variant={"destructive"}
-					className="cursor-pointer">
-					Delete
-				</Button>
+				<DeleteStudentButton sId={sId} />
 
-				<Link href={`/student/${student.sId}`}>
+				<Link href={`/student/${sId}`}>
 					<Button
 						variant={"secondary"}
 						className="w-full cursor-pointer">

@@ -1,10 +1,6 @@
 import EditStudentForm from "@/components/EditStudentForm";
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-} from "@/components/shadcnui/card";
+import { Card, CardHeader, CardTitle } from "@/components/shadcnui/card";
+import { Separator } from "@/components/shadcnui/separator";
 import prisma from "@/lib/db";
 import { Metadata } from "next";
 
@@ -26,18 +22,21 @@ const page = async ({ params }: EditPageProps) => {
 		},
 	});
 
+	const allTeachers = await prisma.teacherTable.findMany();
+
 	return (
 		<section className="grid h-[90dvh] place-items-center">
-			<Card className="w-xs">
-				<CardHeader>
-					<CardTitle className="text-center text-2xl font-semibold">
-						Edit Student Form
-					</CardTitle>
+			<Card className="w-sm gap-2">
+				<CardHeader className="grid place-items-center">
+					<CardTitle className="text-2xl">Edit Student Form</CardTitle>
 				</CardHeader>
 
-				<CardContent>
-					<EditStudentForm studata={studentData} />
-				</CardContent>
+				<Separator />
+
+				<EditStudentForm
+					studata={studentData}
+					teachersInfo={allTeachers}
+				/>
 			</Card>
 		</section>
 	);
