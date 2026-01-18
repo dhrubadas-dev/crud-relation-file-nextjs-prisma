@@ -1,10 +1,18 @@
 "use client";
 
+import fakerGenerator from "@/hooks/fakerGenerator";
 import { StudentFormType } from "@/lib/formType";
 import { studentFormSchema } from "@/lib/zodSchema";
+import createStudent from "@/server/createStudent";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2Icon, SendIcon, SparklesIcon } from "lucide-react";
+import { ImageUpIcon, Loader2Icon, SendIcon, SparklesIcon } from "lucide-react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { useFilePicker } from "use-file-picker";
+import { TeacherTable } from "../../generated/prisma/client";
 import { Button } from "./shadcnui/button";
 import { CardContent, CardFooter } from "./shadcnui/card";
 import { Field, FieldError, FieldLabel } from "./shadcnui/field";
@@ -17,13 +25,6 @@ import {
 	SelectValue,
 } from "./shadcnui/select";
 import { Separator } from "./shadcnui/separator";
-import { TeacherTable } from "../../generated/prisma/client";
-import { useRouter } from "next/navigation";
-import createStudent from "@/server/createStudent";
-import { toast } from "react-toastify";
-import { useState } from "react";
-import fakerGenerator from "@/hooks/fakerGenerator";
-import Image from "next/image";
 
 type StudentFormProps = {
 	teachersInfo: TeacherTable[];
@@ -31,8 +32,17 @@ type StudentFormProps = {
 
 const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 	const [isGenerating, setIsGenerating] = useState(false);
+	const [myImage, setMyImage] = useState(false);
 
 	const { push } = useRouter();
+
+	const {} = useFilePicker({
+		multiple: false,
+		accept: "image/*",
+		readAs: "DataURL",
+		onFilesSuccessfullySelected: () => setMyImage(true),
+		onClear: () => setMyImage(false),
+	});
 
 	const {
 		handleSubmit,
@@ -91,15 +101,21 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 	return (
 		<>
 			<CardContent className="pb-3">
-				<div className="grid place-items-center pb-4">
-					<Image
-						src={"https://placehold.co/250.png"}
-						alt="placeholder"
-						width={250}
-						height={250}
-						className="h-[250px] w-[250px] rounded-2xl"
-					/>
-				</div>
+				{!myImage && (
+					<div className="grid cursor-pointer place-items-center pb-4">
+						<Image
+							src={"https://placehold.co/250.png"}
+							alt="placeholder"
+							width={250}
+							height={250}
+							className="h-[250px] w-[250px] rounded-2xl"
+						/>
+
+						<div className="bg-background/50 absolute grid h-[250px] w-[250px] place-items-center rounded-2xl">
+							<ImageUpIcon size={120} />
+						</div>
+					</div>
+				)}
 
 				<form
 					onSubmit={handleSubmit(addStudentHandler)}
