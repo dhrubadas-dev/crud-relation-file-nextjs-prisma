@@ -19,6 +19,7 @@ import {
 } from "./shadcnui/card";
 import { Separator } from "./shadcnui/separator";
 import DeleteStudentButton from "./DeleteStudentButton";
+import Image from "next/image";
 
 type StudentCardProps = {
 	student: Prisma.StudentTableGetPayload<{
@@ -50,6 +51,14 @@ const StudentCard = ({ student }: StudentCardProps) => {
 			<Separator />
 
 			<CardContent className="grid place-items-center gap-4 text-lg">
+				<Image
+					src={"https://placehold.co/250.png"}
+					alt="placeholder"
+					width={250}
+					height={250}
+					className="h-[250px] w-[250px] rounded-2xl"
+				/>
+
 				<div className="flex items-center gap-2">
 					<MailIcon />
 					<span className="col-span-2 place-self-start">{sEmail}</span>

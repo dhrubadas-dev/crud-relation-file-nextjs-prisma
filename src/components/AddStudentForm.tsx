@@ -23,6 +23,7 @@ import createStudent from "@/server/createStudent";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import fakerGenerator from "@/hooks/fakerGenerator";
+import Image from "next/image";
 
 type StudentFormProps = {
 	teachersInfo: TeacherTable[];
@@ -90,9 +91,19 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 	return (
 		<>
 			<CardContent className="pb-3">
+				<div className="grid place-items-center pb-4">
+					<Image
+						src={"https://placehold.co/250.png"}
+						alt="placeholder"
+						width={250}
+						height={250}
+						className="h-[250px] w-[250px] rounded-2xl"
+					/>
+				</div>
+
 				<form
 					onSubmit={handleSubmit(addStudentHandler)}
-					className="grid gap-4"
+					className="grid grid-cols-2 gap-4"
 					noValidate>
 					<Controller
 						name="sFullName"
@@ -136,6 +147,27 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 					/>
 
 					<Controller
+						name="sPhoneNumber"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Field data-invalid={fieldState.invalid}>
+								<FieldLabel htmlFor={field.name}>Phone Number</FieldLabel>
+								<Input
+									{...field}
+									id={field.name}
+									type="number"
+									placeholder="Enter your phone number"
+									aria-invalid={fieldState.invalid}
+									autoComplete="cc-number"
+								/>
+								{fieldState.invalid && (
+									<FieldError errors={[fieldState.error]} />
+								)}
+							</Field>
+						)}
+					/>
+
+					<Controller
 						name="sGender"
 						control={control}
 						render={({ field, fieldState }) => (
@@ -164,31 +196,12 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 					/>
 
 					<Controller
-						name="sPhoneNumber"
-						control={control}
-						render={({ field, fieldState }) => (
-							<Field data-invalid={fieldState.invalid}>
-								<FieldLabel htmlFor={field.name}>Phone Number</FieldLabel>
-								<Input
-									{...field}
-									id={field.name}
-									type="number"
-									placeholder="Enter your phone number"
-									aria-invalid={fieldState.invalid}
-									autoComplete="cc-number"
-								/>
-								{fieldState.invalid && (
-									<FieldError errors={[fieldState.error]} />
-								)}
-							</Field>
-						)}
-					/>
-
-					<Controller
 						name="teacherTableTId"
 						control={control}
 						render={({ field, fieldState }) => (
-							<Field data-invalid={fieldState.invalid}>
+							<Field
+								className="col-span-2"
+								data-invalid={fieldState.invalid}>
 								<FieldLabel htmlFor={field.name}>Teacher</FieldLabel>
 								<Select
 									name={field.name}
@@ -218,7 +231,7 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 					/>
 
 					<Button
-						className="cursor-pointer"
+						className="col-span-2 cursor-pointer"
 						type="submit"
 						disabled={isSubmitting}>
 						{isSubmitting ? (
