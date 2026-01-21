@@ -36,7 +36,7 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 
 	const { push } = useRouter();
 
-	const {} = useFilePicker({
+	const { openFilePicker, filesContent } = useFilePicker({
 		multiple: false,
 		accept: "image/*",
 		readAs: "DataURL",
@@ -101,21 +101,30 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 	return (
 		<>
 			<CardContent className="pb-3">
-				{!myImage && (
-					<div className="grid cursor-pointer place-items-center pb-4">
+				<div className="grid cursor-pointer place-items-center pb-4">
+					{!myImage && (
+						<div className="bg-background/50 grid h-[250px] w-[250px] place-items-center rounded-2xl">
+							<button
+								type="button"
+								onClick={openFilePicker}
+								className="cursor-pointer">
+								<ImageUpIcon size={120} />
+							</button>
+						</div>
+					)}
+
+					{filesContent.map((file, index) => (
 						<Image
-							src={"https://placehold.co/250.png"}
-							alt="placeholder"
+							key={index}
+							// src={"https://placehold.co/250.png"}
+							src={file.content}
+							alt={file.name}
 							width={250}
 							height={250}
 							className="h-[250px] w-[250px] rounded-2xl"
 						/>
-
-						<div className="bg-background/50 absolute grid h-[250px] w-[250px] place-items-center rounded-2xl">
-							<ImageUpIcon size={120} />
-						</div>
-					</div>
-				)}
+					))}
+				</div>
 
 				<form
 					onSubmit={handleSubmit(addStudentHandler)}
