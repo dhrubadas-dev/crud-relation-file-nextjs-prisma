@@ -6,8 +6,10 @@ import {
 	TransgenderIcon,
 	VenusIcon,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { Prisma } from "../../generated/prisma/client";
+import DeleteStudentButton from "./DeleteStudentButton";
 import { Badge } from "./shadcnui/badge";
 import { Button } from "./shadcnui/button";
 import {
@@ -18,8 +20,6 @@ import {
 	CardTitle,
 } from "./shadcnui/card";
 import { Separator } from "./shadcnui/separator";
-import DeleteStudentButton from "./DeleteStudentButton";
-import Image from "next/image";
 
 type StudentCardProps = {
 	student: Prisma.StudentTableGetPayload<{
@@ -52,7 +52,7 @@ const StudentCard = ({ student }: StudentCardProps) => {
 
 			<CardContent className="grid place-items-center gap-4 text-lg">
 				<Image
-					src={"https://placehold.co/250.png"}
+					src={`/uploads/${student}`}
 					alt="placeholder"
 					width={250}
 					height={250}

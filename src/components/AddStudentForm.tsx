@@ -36,7 +36,7 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 
 	const { push } = useRouter();
 
-	const { openFilePicker, filesContent } = useFilePicker({
+	const { openFilePicker, filesContent, plainFiles } = useFilePicker({
 		multiple: false,
 		accept: "image/*",
 		readAs: "DataURL",
@@ -64,7 +64,7 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 	});
 
 	const addStudentHandler = async (asData: StudentFormType) => {
-		const { isSuccess, message } = await createStudent(asData);
+		const { isSuccess, message } = await createStudent(asData, plainFiles[0]);
 
 		await new Promise<void>((r) => setTimeout(r, 1000));
 
@@ -103,26 +103,34 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 			<CardContent className="pb-3">
 				<div className="grid cursor-pointer place-items-center pb-4">
 					{!myImage && (
-						<div className="bg-background/50 grid h-[250px] w-[250px] place-items-center rounded-2xl">
-							<button
-								type="button"
-								onClick={openFilePicker}
-								className="cursor-pointer">
-								<ImageUpIcon size={120} />
-							</button>
-						</div>
+						<button
+							type="button"
+							onClick={openFilePicker}
+							className="bg-background/50 grid h-[250px] w-[250px] cursor-pointer place-items-center rounded-2xl">
+							<ImageUpIcon size={120} />
+						</button>
 					)}
 
 					{filesContent.map((file, index) => (
-						<Image
+						<button
 							key={index}
-							// src={"https://placehold.co/250.png"}
-							src={file.content}
-							alt={file.name}
-							width={250}
-							height={250}
-							className="h-[250px] w-[250px] rounded-2xl"
-						/>
+							type="button"
+							onClick={openFilePicker}
+							className="grid cursor-pointer place-items-center">
+							<ImageUpIcon
+								size={120}
+								className="absolute opacity-60"
+							/>
+							<Image
+								key={index}
+								// src={"https://placehold.co/250.png"}
+								src={file.content}
+								alt={file.name}
+								width={250}
+								height={250}
+								className="h-[250px] w-[250px] rounded-2xl"
+							/>
+						</button>
 					))}
 				</div>
 
