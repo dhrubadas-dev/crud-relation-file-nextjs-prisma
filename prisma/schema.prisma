@@ -18,8 +18,8 @@ model TeacherTable {
 }
 
 model StudentTable {
-  sImg            String       @unique
   sId             String       @id @default(uuid())
+  sImg            String       @unique
   sFullName       String
   sEmail          String       @unique
   sGender         String

@@ -8,6 +8,7 @@ CREATE TABLE "TeacherTable" (
 -- CreateTable
 CREATE TABLE "StudentTable" (
     "sId" TEXT NOT NULL PRIMARY KEY,
+    "sImg" TEXT NOT NULL,
     "sFullName" TEXT NOT NULL,
     "sEmail" TEXT NOT NULL,
     "sGender" TEXT NOT NULL,
@@ -15,6 +16,9 @@ CREATE TABLE "StudentTable" (
     "teacherTableTId" TEXT NOT NULL,
     CONSTRAINT "StudentTable_teacherTableTId_fkey" FOREIGN KEY ("teacherTableTId") REFERENCES "TeacherTable" ("tId") ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "StudentTable_sImg_key" ON "StudentTable"("sImg");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "StudentTable_sEmail_key" ON "StudentTable"("sEmail");
