@@ -2,12 +2,13 @@
 	"name": "crud-relation-file-nextjs-prisma",
 	"version": "1.0.0",
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"dev": "next dev",
 		"build": "prisma generate && next build",
 		"start": "next start",
 		"lint": "eslint",
-		"prod": "eslint && prisma generate && next build && next start",
+		"prod": "prisma generate && eslint && next build && next start",
 		"migrate": "prisma migrate dev && prisma generate",
 		"studio": "prisma studio --browser none"
 	},
@@ -21,7 +22,7 @@
 		"@radix-ui/react-slot": "^1.2.4",
 		"class-variance-authority": "^0.7.1",
 		"clsx": "^2.1.1",
-		"dotenv": "^17.2.3",
+		"dotenv": "^17.2.4",
 		"lucide-react": "^0.563.0",
 		"nanoid": "^5.1.6",
 		"next": "^16.1.6",
@@ -37,13 +38,13 @@
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
-		"@faker-js/faker": "^10.2.0",
+		"@faker-js/faker": "^10.3.0",
 		"@tailwindcss/postcss": "^4.1.18",
-		"@types/node": "^25.1.0",
-		"@types/react": "^19.2.10",
+		"@types/node": "^25.2.3",
+		"@types/react": "^19.2.13",
 		"@types/react-dom": "^19.2.3",
 		"babel-plugin-react-compiler": "^1.0.0",
-		"eslint": "^9.39.2",
+		"eslint": "^10.0.0",
 		"eslint-config-next": "^16.1.6",
 		"eslint-plugin-react-hooks": "^7.0.1",
 		"prettier": "^3.8.1",
@@ -55,8 +56,6 @@
 	},
 	"trustedDependencies": [
 		"@prisma/engines",
-		"@tailwindcss/oxide",
-		"better-sqlite3",
 		"prisma",
 		"sharp",
 		"unrs-resolver"

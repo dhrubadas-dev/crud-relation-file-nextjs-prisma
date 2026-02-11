@@ -5,7 +5,6 @@ import { StudentFormType } from "@/lib/formType";
 import { nanoid } from "nanoid";
 import { revalidatePath } from "next/cache";
 import sharp from "sharp";
-import { Prisma } from "../../generated/prisma/client";
 
 const createStudent = async (asData: StudentFormType, file: File) => {
 	try {
@@ -35,12 +34,14 @@ const createStudent = async (asData: StudentFormType, file: File) => {
 			message: "Student created successfully",
 		};
 	} catch (error) {
-		if (error instanceof Prisma.PrismaClientKnownRequestError) {
-			return {
-				isSuccess: false,
-				message: error.message,
-			};
-		}
+		// if (error instanceof Prisma.PrismaClientKnownRequestError) {
+		// 	return {
+		// 		isSuccess: false,
+		// 		message: error.message,
+		// 	};
+		// }
+
+		console.log(error);
 
 		return {
 			isSuccess: false,

@@ -112,15 +112,7 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 					)}
 
 					{filesContent.map((file, index) => (
-						<button
-							key={index}
-							type="button"
-							onClick={openFilePicker}
-							className="grid cursor-pointer place-items-center">
-							<ImageUpIcon
-								size={120}
-								className="absolute opacity-60"
-							/>
+						
 							<Image
 								key={index}
 								// src={"https://placehold.co/250.png"}
@@ -130,7 +122,7 @@ const AddStudentForm = ({ teachersInfo }: StudentFormProps) => {
 								height={250}
 								className="h-[250px] w-[250px] rounded-2xl"
 							/>
-						</button>
+						
 					))}
 				</div>
 
