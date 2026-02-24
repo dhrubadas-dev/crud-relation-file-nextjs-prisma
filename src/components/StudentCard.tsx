@@ -6,7 +6,6 @@ import {
 	TransgenderIcon,
 	VenusIcon,
 } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { Prisma } from "../../generated/prisma/client";
 import DeleteStudentButton from "./DeleteStudentButton";
@@ -51,14 +50,6 @@ const StudentCard = ({ student }: StudentCardProps) => {
 			<Separator />
 
 			<CardContent className="grid place-items-center gap-4 text-lg">
-				<Image
-					src={`/uploads/${student}`}
-					alt="placeholder"
-					width={250}
-					height={250}
-					className="h-[250px] w-[250px] rounded-2xl"
-				/>
-
 				<div className="flex items-center gap-2">
 					<MailIcon />
 					<span className="col-span-2 place-self-start">{sEmail}</span>

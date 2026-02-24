@@ -15,7 +15,7 @@ const page = async () => {
 	});
 
 	return (
-		<section className="grid grid-cols-1 place-items-center gap-6 md:grid-cols-2 xl:grid-cols-3">
+		<section className="grid grid-cols-1 place-items-center gap-6 pt-18 md:grid-cols-2 xl:grid-cols-3">
 			{allStudentData.map((info) => (
 				<StudentCard
 					key={info.sId}

@@ -19,7 +19,6 @@ model TeacherTable {
 
 model StudentTable {
   sId             String       @id @default(uuid())
-  sImg            String       @unique
   sFullName       String
   sEmail          String       @unique
   sGender         String
