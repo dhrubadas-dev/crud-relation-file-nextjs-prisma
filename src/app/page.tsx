@@ -1,3 +1,4 @@
+import RippleGrid from "@/components/RippleGrid";
 import StudentCard from "@/components/StudentCard";
 import prisma from "@/lib/db";
 import { Metadata } from "next";

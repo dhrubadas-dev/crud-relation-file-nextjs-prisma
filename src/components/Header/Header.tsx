@@ -1,6 +1,14 @@
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
 import ThemeToggleButton from "../ThemeToggleButton";
+import {
+	Sheet,
+	SheetContent,
+	SheetDescription,
+	SheetHeader,
+	SheetTitle,
+	SheetTrigger,
+} from "../shadcnui/sheet";
 
 const Header = () => {
 	return (
@@ -16,7 +24,7 @@ const Header = () => {
 					</h1>
 				</Link>
 
-				<nav className="flex items-center gap-4">
+				<nav className="md: flex items-center gap-4">
 					<Link href={"/"}>Home</Link>
 
 					<Link
@@ -30,6 +38,33 @@ const Header = () => {
 						href={"/teacher/create"}>
 						<PlusIcon /> Teacher
 					</Link>
+
+					{/* sheet start */}
+
+					<Sheet>
+						<SheetTrigger>Open</SheetTrigger>
+						<SheetContent>
+							<SheetHeader className="sr-only">
+								<SheetTitle></SheetTitle>
+							</SheetHeader>
+
+							<Link href={"/"}>Home</Link>
+
+							<Link
+								className="flex gap-2"
+								href={"/student/create"}>
+								<PlusIcon /> Student
+							</Link>
+
+							<Link
+								className="flex gap-2"
+								href={"/teacher/create"}>
+								<PlusIcon /> Teacher
+							</Link>
+						</SheetContent>
+					</Sheet>
+
+					{/* sheet end */}
 
 					<ThemeToggleButton />
 				</nav>
